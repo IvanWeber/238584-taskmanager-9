@@ -1,6 +1,6 @@
-// main.js
-
 'use strict';
+
+const NUMBER_OF_DEFAULT_TASKS = 3;
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -490,6 +490,8 @@ const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 render(boardElement, createSortingTemplate(), `afterbegin`);
 render(taskListElement, createTaskEditTemplate(), `beforeend`);
 
-new Array(3).fill(``).forEach(() => render(taskListElement, createTaskTemplate(), `beforeend`));
+for (let i = 1; i <= NUMBER_OF_DEFAULT_TASKS; i++) {
+  render(taskListElement, createTaskTemplate(), `beforeend`);
+}
 
 render(boardElement, createLoadMoreButtonTemplate(), `beforeend`);
