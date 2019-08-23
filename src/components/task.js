@@ -1,4 +1,8 @@
-export const createTaskTemplate = () => {
+export const createTaskTemplate = (task) => {
+  const date = new Date(task.dueDate);
+  const monthNames = [`January`, `February`, `March`, `April`, `May`, `June`,
+    `July`, `August`, `September`, `October`, `November`, `December`
+  ];
   return `<article class="card card--black">
     <div class="card__form">
       <div class="card__inner">
@@ -24,7 +28,7 @@ export const createTaskTemplate = () => {
         </div>
 
         <div class="card__textarea-wrap">
-          <p class="card__text">Example default task with default color.</p>
+          <p class="card__text">${task.description}</p>
         </div>
 
         <div class="card__settings">
@@ -32,31 +36,25 @@ export const createTaskTemplate = () => {
             <div class="card__dates">
               <div class="card__date-deadline">
                 <p class="card__input-deadline-wrap">
-                  <span class="card__date">23 September</span>
-                  <span class="card__time">11:15 PM</span>
+                  <span class="card__date">${date.getDate()} ${monthNames[date.getMonth()]}</span>
+                  <span class="card__time">${date.getHours() > 11 ? (date.getHours() - 12) : date.getHours()}:${date.getMinutes()} ${date.getHours() > 11 ? `PM` : `AM`}</span>
                 </p>
               </div>
             </div>
 
             <div class="card__hashtag">
               <div class="card__hashtag-list">
-                <span class="card__hashtag-inner">
-                  <span class="card__hashtag-name">
-                    #todo
-                  </span>
-                </span>
-
-                <span class="card__hashtag-inner">
-                  <span class="card__hashtag-name">
-                    #personal
-                  </span>
-                </span>
-
-                <span class="card__hashtag-inner">
-                  <span class="card__hashtag-name">
-                    #important
-                  </span>
-                </span>
+              
+                    ${Object.keys(task.tags).map(function (key) {
+    if (task.tags[key] !== undefined) {
+      return `<span class="card__hashtag-inner">
+                                    <span class="card__hashtag-name">
+                                      #${task.tags[key]}
+                                    </span>
+                                  </span>`;
+    }
+    return ``;
+  }).join(``)}
               </div>
             </div>
           </div>
@@ -65,3 +63,15 @@ export const createTaskTemplate = () => {
     </div>
   </article>`;
 };
+// // Create a new JavaScript Date object based on the timestamp
+// // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+// var date = new Date(unix_timestamp*1000);
+// // Hours part from the timestamp
+// var hours = date.getHours();
+// // Minutes part from the timestamp
+// var minutes = "0" + date.getMinutes();
+// // Seconds part from the timestamp
+// var seconds = "0" + date.getSeconds();
+//
+// // Will display time in 10:30:23 format
+// var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);

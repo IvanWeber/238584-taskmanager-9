@@ -1,4 +1,8 @@
-export const createTaskEditTemplate = () => {
+export const createTaskEditTemplate = (task) => {
+  const date = new Date(task.dueDate);
+  const monthNames = [`January`, `February`, `March`, `April`, `May`, `June`,
+    `July`, `August`, `September`, `October`, `November`, `December`
+  ];
   return `<article class="card card--edit card--yellow card--repeat">
     <form class="card__form" method="get">
       <div class="card__inner">
@@ -44,7 +48,7 @@ export const createTaskEditTemplate = () => {
                     type="text"
                     placeholder=""
                     name="date"
-                    value="23 September 11:15 PM"
+                    value="${date.getDate()} ${monthNames[date.getMonth()]} ${date.getHours() > 11 ? (date.getHours() - 12) : date.getHours()}:${date.getMinutes()} ${date.getHours() > 11 ? `PM` : `AM`}"
                   />
                 </label>
               </fieldset>
@@ -142,7 +146,16 @@ export const createTaskEditTemplate = () => {
                     class="card__hashtag-hidden-input"
                   />
                   <p class="card__hashtag-name">
-                    #repeat
+                    ${Object.keys(task.tags).map(function (key) {
+    if (task.tags[key] !== undefined) {
+      return `<span class="card__hashtag-inner">
+                                    <span class="card__hashtag-name">
+                                      #${task.tags[key]}
+                                    </span>
+                                  </span>`;
+    }
+    return ``;
+  }).join(``)}
                   </p>
                   <button type="button" class="card__hashtag-delete">
                     delete
