@@ -7,10 +7,12 @@ import {createTaskEditTemplate} from './components/task-edit.js';
 import {createLoadMoreButtonTemplate} from './components/load-more-button.js';
 import {createBoardTemplate} from './components/board.js';
 import {createSortingTemplate} from './components/sorting.js';
-
+import {LoadMore} from './components/load-more.js';
 
 const NUMBER_OF_DEFAULT_TASKS = 19;
 const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
+
+
 
 const dataObject = new Data(NUMBER_OF_DEFAULT_TASKS, MILLISECONDS_IN_DAY);
 
@@ -46,5 +48,10 @@ for (let i = 0; i < NUMBER_OF_DEFAULT_TASKS; i++) {
   }
 }
 
-// Рендерим кнопку
+// Рендерим кнопку load more
 render(boardElement, createLoadMoreButtonTemplate(), `beforeend`);
+const cardsWrap = document.querySelector(`.board__tasks`);
+const cards = cardsWrap.querySelectorAll(`.card`);
+const buttonLoadMore = document.querySelector(`.load-more`);
+const loadMoreButton = new LoadMore(cardsWrap, cards, buttonLoadMore, 8);
+loadMoreButton.initiateLoadMoreButton();
