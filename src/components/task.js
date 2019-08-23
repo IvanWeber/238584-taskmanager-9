@@ -22,7 +22,7 @@ export const createTaskTemplate = (task) => {
         </div>
 
         <div class="card__color-bar">
-          <svg class="card__color-bar-wave" width="100%" height="10">
+          <svg class="card__color-bar-wave" style="background-color: ${task.color}" width="100%" height="10">
             <use xlink:href="#wave"></use>
           </svg>
         </div>
