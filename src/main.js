@@ -13,12 +13,9 @@ const NUMBER_OF_DEFAULT_TASKS = 19;
 const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
 
-
 const dataObject = new Data(NUMBER_OF_DEFAULT_TASKS, MILLISECONDS_IN_DAY);
 
 const tasks = dataObject.getTasks();
-
-console.log(tasks);
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);

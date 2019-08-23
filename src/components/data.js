@@ -32,7 +32,7 @@ export class Data {
         `Сделать домашку`,
         `Пройти интенсив на соточку`,
       ][Math.floor(Math.random() * 3)],
-      dueDate: Date.now() - 7 * this._millisecondsInDay + Math.round(Math.random() * 14 * this._millisecondsInDay) ,
+      dueDate: Date.now() - 7 * this._millisecondsInDay + Math.round(Math.random() * 14 * this._millisecondsInDay),
       tags: this.getNewRandomArrayFromArray(tagsToBeProcessed, 3),
       repeatingDays: {
         'mo': Math.round(Math.random()) === 1,
