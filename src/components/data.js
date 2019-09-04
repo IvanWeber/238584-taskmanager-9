@@ -10,7 +10,7 @@ export class Data {
     if (quantityOfElements !== 0) {
       for (let i = 0; i < quantityOfElements; i++) {
         const randomArrayIndex = Math.round(Math.random() * array.length);
-        newArray[i] = array[randomArrayIndex];
+        newArray.push(array[randomArrayIndex]);
         array.splice(randomArrayIndex, 1);
       }
     }
@@ -58,7 +58,7 @@ export class Data {
   getTasks() {
     let tasks = [];
     for (let i = 0; i < this._numberOfDefaultTasks; i++) {
-      tasks[i] = this.getTask();
+      tasks.push(this.getTask());
     }
     return tasks;
   }
