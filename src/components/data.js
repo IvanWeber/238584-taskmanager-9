@@ -64,28 +64,17 @@ export class Data {
   }
 
   getFilterAll(tasks) {
-    let count = 0;
-    tasks.forEach((task) => {
-      if (task.isArchive === false) {
-        count++;
-      }
-    });
     return {
       title: `All`,
-      count,
+      count: tasks.filter((t) => !t.isActive).length,
     };
   }
 
   getFilterOverdue(tasks) {
-    let count = 0;
-    tasks.forEach((task) => {
-      if (task.dueDate < Date.now()) {
-        count++;
-      }
-    });
+    const now = Date.now();
     return {
       title: `Overdue`,
-      count,
+      count: tasks.filter((t) => t.dueDate < now).length,
     };
   }
 
@@ -107,15 +96,9 @@ export class Data {
   }
 
   getFilterFavorites(tasks) {
-    let count = 0;
-    tasks.forEach((task) => {
-      if (task.isFavorite) {
-        count++;
-      }
-    });
     return {
       title: `Favorites`,
-      count,
+      count: tasks.filter((t) => t.isFavorite).length,
     };
   }
 
@@ -148,15 +131,9 @@ export class Data {
   }
 
   getFilterArchive(tasks) {
-    let count = 0;
-    tasks.forEach((task) => {
-      if (task.isArchive) {
-        count++;
-      }
-    });
     return {
       title: `Archive`,
-      count,
+      count: tasks.filter((t) => t.isArchive).length,
     };
   }
 }
